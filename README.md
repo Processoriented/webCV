@@ -61,6 +61,25 @@ urlpatterns = [
 ]
 ```
 
+> #### Deviation from article
+>
+> Using Django OAuth Toolkit (DOT), I added the following to `backend/urls.py`:
+>
+
+```python
+# file: backend/urls.py
+...
+urlpatterns = [
+    ...
+    url(r'^o/', include(
+        'oauth2_provider.urls', namespace='oauth2_provider')),
+]
+```
+
+> resume article text...
+>
+
+
 By doing this, we’re just making each app look after its own urls. Maybe in the future you will add more apps to the backend and it would get messy to add everything to `backend/urls.py`
 
 You should now have a functioning backend DRF API with a single endpoint /auth that lets users get their auth token. Let’s setup a user and run the backend server for testing later.
@@ -76,6 +95,18 @@ Remember to run migrate for the first time to create your database. Then we’ll
 ```bash
 $ curl -X POST -d "username=username&password=password" http://localhost:8000/auth
 ```
+
+> #### For OAuth
+>
+> Register a local app at `http://localhost:8000/o/applications/`
+> Settings: 
+> - Name: **local**
+> - Client Type: **confidential**
+> - Authorization Grant Type: **Resource owner password-based**
+>
+> Save app, and note Client Id and Client Secret.
+> Use a slightly different curl command to get the token from DOT:
+> `curl -X POST -d "grant_type=password&username=<username>&password=<password" -u"<Client id>:<Client secret>" http://localhost:8000/o/token/
 
 ### The Frontend
 
