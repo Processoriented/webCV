@@ -231,3 +231,13 @@ ___
 I would love to hear some feedback from others about this setup: how could I potentially improve it, anything that needs changing or could be done better, etc.
 
 Internally at work we have a git repository with a template React/DRF setup that we clone for each new project. Hopefully I can open this up to the public and link it here but I should ask for permission first— and I’m writing this blog post late at night so it will have to wait until tomorrow.
+
+## Dev Info
+
+Settings in the Dev environment:
+
+### Superuser
+
+- __User Name__: admin
+- __Password__: ssn724SDF
+
