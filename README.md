@@ -107,7 +107,7 @@ $ curl -X POST -d "username=username&password=password" http://localhost:8000/au
 > Save app, and note Client Id and Client Secret.
 > Use a slightly different curl command to get the token from DOT:
 ```bash
-curl -X POST -d "grant_type=password&username=<username>&password=<password" -u"<Client id>:<Client secret>" http://localhost:8000/o/token/
+$ curl -X POST -d "grant_type=password&username=<username>&password=<password>" -u"<Client id>:<Client secret>" http://localhost:8000/o/token/
 ```
 >
 
