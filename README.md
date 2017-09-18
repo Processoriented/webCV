@@ -276,3 +276,7 @@ Settings in the Dev environment:
 - __User Name__: admin
 - __Password__: ssn724SDF
 
+### OAuth App in DEV (not accessible outside dev environment)
+
+- __Client Id:__ YligNZTAGXY6nJ3717tPqFuVf5yb68ymHHqNqJt9
+- __Client Secret:__ CUzoq4K0Dlg9w9V057vKr3mf8x6fUBtGcssRSdg65NfuPaFHRoOwwOoJTjV9bf9p4yUbeVTvkZ7gWsIJ1WymwazS7Oi2hn3MRcS86jKzfqW9wmzd0DgUSvisNEIoj532
