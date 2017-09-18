@@ -124,8 +124,12 @@ $ npm run eject
 
 Next we want to install some additional dependencies.
 
+> #### Change from Article
+>
+> use `babel-preset-env` instead of `babel-preset-es2015 babel-preset-stage-3`
+
 ```bash
-$ npm install --save-dev babel-preset-es2015 babel-preset-stage-3
+# $ npm install --save-dev babel-preset-es2015 babel-preset-stage-3
 $ npm install --save redux redux-logger redux-persist react-redux
 $ npm install --save axios react-router-dom lodash
 ```
