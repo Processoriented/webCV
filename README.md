@@ -33,6 +33,10 @@ $ django-admin startapp api
 
 You should now setup your database and edit your project’s settings to use the database. Good documentation on how to do this for your particular DB can be found on [Django’s website](https://docs.djangoproject.com/en/1.11/topics/install/#get-your-database-running). Then you should configure DRF following the instructions on their website found [here](http://www.django-rest-framework.org/#installation).
 
+> #### Oauth Notes
+>
+> For this project I went ahead and used the [Django OAuth Toolkit](https://django-oauth-toolkit.readthedocs.io/en/latest/rest-framework/getting_started.html) library. 
+
 The next step you will most likely want to do is setup authentication in your API. If you wont require authentication (e.g. no user logins), you can skip this. My company’s React/Django template project currently uses plain token authentication as it’s the simplest to setup. I recommend this for those learning as well, but it’s not the best for production. These tokens never expire which poses quite a security risk if it’s ever leaked. Soon we’ll update the template project to use something like oauth, or expiring JWT tokens — as of yet it’s undecided. Documentation for configuring token authentication is [here](http://www.django-rest-framework.org/api-guide/authentication/#tokenauthentication).
 
 Once token authentication is configured, you will want to create a `urls.py` in your app (if you haven’t already), and use DRF’s token auth view. This endpoint at `/auth` lets users POST their username and password and get their auth token as a response. In the frontend, this token will get stored in the Redux store for further API calls.
