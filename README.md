@@ -138,38 +138,39 @@ Now instead of listing all the code used by our React template project, I’m ju
 
 ```javascript
 // file: src/store.js
-import { compose, createStore, applyMiddleware } from 'redux';
-import { createLogger } from 'redux-logger';
-import { persistStore, autoRehydrate } from 'redux-persist';
-import rootReducer from './reducers';
+import { compose, createStore, applyMiddleware } from 'redux'
+import { createLogger } from 'redux-logger'
+import { persistStore, autoRehydrate } from 'redux-persist'
+import rootReducer from './reducers'
 
 const store = createStore(
   rootReducer,
   compose(
-    applyMiddleware(
-      createLogger(),
-    ),
-    autoRehydrate()
-  )
-);
-persistStore(store);
-export default store;
+    applyMiddleware(createLogger()),
+    autoRehydrate(),
+  ),
+)
+
+persistStore(store)
+
+export default store
+
 ```
 
 And then setup the token reducer
 
 ```javascript
 // file: src/reducers/index.js
-import { combineReducers } from 'redux';
-import * as actionType from '../actions/types';
+import { combineReducers } from 'redux'
+import * as actionType from '../actions/types'
 
-const tokenInitialState = null;
+const tokenInitialState = null
 const token = (state = tokenInitialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case actionType.SET_TOKEN:
-      return action.data;
+      return action.data
     default:
-      return state;
+      return state
   }
 }
 
@@ -177,63 +178,66 @@ const appReducer = combineReducers({
   token,
 })
 
-const rootReducer = (state, action) => {
-  return appReducer(state, action);
-}
+const rootReducer = (state, action) => appReducer(state, action)
 
-export default rootReducer;
+export default rootReducer
+
 ```
 
 And finally the actions
 
 ```javascript
-// file: src/actions/index.js
-import * as actionType from './types';
+// file: src/actions/index.js -- Updated from article to use airbnb style
+import * as actionType from './types'
 
-export const setToken = (data) => {
-  return {
-    type: actionType.SET_TOKEN,
-    data
-  }
-}
+const setToken = data => ({
+  type: actionType.SET_TOKEN,
+  data,
+})
+
+export default setToken
+
 ```
 
 ```javascript
-// file: src/actions/types.js
-export const SET_TOKEN = "SET_TOKEN";
+// file: src/actions/types.js -- Updated from article to use airbnb style
+// eslint-disable-next-line import/prefer-default-export
+export const SET_TOKEN = 'SET_TOKEN'
+
 ```
 
 We now have an action we can dispatch to store the user’s token after logging in. So next lets look at how we login
 
 ```javascript
-// file: src/util/Auth.js
-import axios from 'axios';
-import _ from 'lodash';
-import store from '../store';
+// file: src/util/Auth.js -- Updated from article to use airbnb style
+import axios from 'axios'
+import _ from 'lodash'
+import store from '../store'
 import { setToken } from '../actions'
-import { URL, LOGIN } from '../config/Api';
+import { URL, LOGIN } from '../config/Api'
 
 export function InvalidCredentialsException(message) {
-    this.message = message;
-    this.name = 'InvalidCredentialsException';
+  this.message = message
+  this.name = 'InvalidCredentialsException'
 }
 
-export function login(username, password) {
-  return axios
-    .post(URL + LOGIN, {
-      username,
-      password
-    })
-    .then(function (response) {
-      store.dispatch(setToken(response.data.token));
-    })
-    .catch(function (error) {
+export const login = (username, password) => (
+  axios
+    .post(URL + LOGIN, { username, password })
+    .then(response => store.dispatch(setToken(response.data.token)))
+    .catch((error) => {
       // raise different exception if due to invalid credentials
       if (_.get(error, 'response.status') === 400) {
-        throw new InvalidCredentialsException(error);
+        throw new InvalidCredentialsException(error)
       }
-      throw error;
-    });
+      throw error
+    })
+)
+
+export function loggedIn() {
+  return store.getState().token == null
+}
+
 }
 
 export function loggedIn() {
@@ -244,26 +248,30 @@ export function loggedIn() {
 This piece of code uses axios to post to our `/auth` backend and then dispatch the returned token to our redux store. Once this is done, we can now create an axios based API client using our stored token to make further API calls from elsewhere in our React components.
 
 ```javascript
-// file: src/util/ApiClient.js
-import axios from 'axios';
-import store from '../store';
-import { URL } from '../config/Api';
+// file: src/util/ApiClient.js -- Updated from article to use airbnb style
+import axios from 'axios'
+import store from '../store'
+import { URL } from '../config/Api'
 
-export const apiClient = function() {
-        const token = store.getState().token;
-        const params = {
-            baseURL: URL,
-            headers: {'Authorization': 'Token ' + token}
-        };
-        return axios.create(params);
+const apiClient = () => {
+  const token = store.getState().token
+  const params = {
+    baseURL: URL,
+    headers: { Authorization: `Token ${token}` },
+  }
+  return axios.create(params)
+}
+
+export default apiClient
 }
 ```
 
 We reference the file `../config/Api` in the last two code-blocks. Here’s what that file looks like — it’s simply a file to map constants to endpoints, making the code more readable and easier to modify later.
 
 ```javascript
-export const URL = process.env.API_URL;
-export const LOGIN = "/auth";
+// Updated from article to use airbnb style
+export const URL = process.env.API_URL
+export const LOGIN = "/auth"
 ```
 
 That’s all there is to it to connect our frontend to our backend. You can now try using the `Auth.js` login function to get the auth token for the user we created earlier. If you do, you can look at your browser’s dev tools to check the output from redux-logger to see the result of the setToken redux action.

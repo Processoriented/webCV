@@ -3,7 +3,7 @@ import * as actionType from '../actions/types'
 
 const tokenInitialState = null
 const token = (state = tokenInitialState, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case actionType.SET_TOKEN:
       return action.data
     default:
@@ -15,8 +15,6 @@ const appReducer = combineReducers({
   token,
 })
 
-const rootReducer = (state, action) => {
-  return appReducer(state, action)
-}
+const rootReducer = (state, action) => appReducer(state, action)
 
 export default rootReducer

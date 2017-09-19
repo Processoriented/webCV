@@ -6,12 +6,11 @@ import rootReducer from './reducers'
 const store = createStore(
   rootReducer,
   compose(
-    applyMiddleware(
-      createLogger(),
-    ),
-    autoRehydrate()
-  )
+    applyMiddleware(createLogger()),
+    autoRehydrate(),
+  ),
 )
+
 persistStore(store)
 
 export default store
