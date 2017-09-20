@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use strict';
 
 const path = require('path');
@@ -53,3 +54,4 @@ module.exports = {
   publicUrl: getPublicUrl(resolveApp('package.json')),
   servedPath: getServedPath(resolveApp('package.json')),
 };
+/* eslint-enable */

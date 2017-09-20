@@ -1,3 +1,4 @@
+/* eslint-disable */
 'use strict';
 
 const fs = require('fs');
@@ -88,3 +89,4 @@ function getClientEnvironment(publicUrl) {
 }
 
 module.exports = getClientEnvironment;
+/* eslint-enable */

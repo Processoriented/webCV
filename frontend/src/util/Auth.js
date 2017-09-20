@@ -10,9 +10,20 @@ export function InvalidCredentialsException(message) {
 }
 
 export const login = (username, password) => (
-  axios
-    .post(URL + LOGIN, { username, password, client_id: CLIENT_ID, client_secret: CLIENT_SECRET })
-    .then(response => store.dispatch(setToken(response.data.token)))
+  axios.request({
+    url: LOGIN,
+    method: 'post',
+    baseURL: URL,
+    data: {
+      grant_type: 'password',
+      username,
+      password,
+    },
+    auth: {
+      username: CLIENT_ID,
+      password: CLIENT_SECRET,
+    },
+  }).then(response => store.dispatch(setToken(response.data.token)))
     .catch((error) => {
       // raise different exception if due to invalid credentials
       if (_.get(error, 'response.status') === 400) {
