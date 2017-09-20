@@ -167,6 +167,7 @@ lib-cov
 # Coverage directory used by tools like istanbul
 coverage
 /coverage/
+/lib/
 
 # nyc test coverage
 .nyc_output

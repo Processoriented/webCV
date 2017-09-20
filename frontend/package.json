@@ -10,7 +10,11 @@
     "> 1%"
   ],
   "scripts": {
-    "start": "babel-node src",
+    "start": "yarn dev:start",
+    "dev:start": "nodemon --ignore lib --exec babel-node src",
+    "prod:build": "rimraf lib && babel src -d lib --ignore .test.js",
+    "prod:start": "cross-env NODE_ENV=production pm2 start lib && pm2 logs",
+    "prod:stop": "pm2 delete server",
     "test": "eslint src && flow && jest --coverage",
     "precommit": "yarn test",
     "prepush": "yarn test"
@@ -21,6 +25,7 @@
     "babel-jest": "^21.0.2",
     "babel-preset-env": "^1.6.0",
     "babel-preset-flow": "^6.23.0",
+    "cross-env": "^5.0.5",
     "eslint": "^4.7.1",
     "eslint-config-airbnb": "^15.1.0",
     "eslint-plugin-compat": "^1.0.4",
@@ -30,6 +35,12 @@
     "eslint-plugin-react": "^7.1.0",
     "flow-bin": "^0.54.1",
     "husky": "^0.14.3",
-    "jest": "^21.1.0"
+    "jest": "^21.1.0",
+    "nodemon": "^1.12.1",
+    "pm2": "^2.7.0",
+    "rimraf": "^2.6.2"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0"
   }
 }

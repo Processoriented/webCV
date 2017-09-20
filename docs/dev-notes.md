@@ -35,6 +35,10 @@ yarn add --dev eslint-plugin-compat
 yarn add --dev flow-bin babel-preset-flow babel-eslint eslint-plugin-flowtype
 yarn add --dev jest babel-jest
 yarn add --dev husky
+yarn add --dev nodemon
+yarn add --dev pm2
+yarn add --dev rimraf
+yarn add babel-polyfill
 ```
 
 #### Bye-bye CRA
