@@ -1,10 +1,5 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import './index.css'
-import App from './App'
-import registerServiceWorker from './registerServiceWorker'
+// @flow
 
-// eslint-disable-next-line no-undef
-ReactDOM.render(<App />, document.getElementById('root'))
-
-registerServiceWorker()
+/* eslint-disable no-console */
+const str = 'ES6'
+console.log(`Hello ${str}`)
