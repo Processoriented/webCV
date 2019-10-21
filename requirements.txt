@@ -1,6 +1,6 @@
 certifi==2017.7.27.1
 chardet==3.0.4
-Django==1.11.5
+Django==1.11.23
 django-filter==1.0.4
 django-oauth-toolkit==1.0.0
 djangorestframework==3.6.4
