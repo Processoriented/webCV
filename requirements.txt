@@ -3,7 +3,7 @@ chardet==3.0.4
 Django==1.11.29
 django-filter==1.0.4
 django-oauth-toolkit==1.0.0
-djangorestframework==3.9.1
+djangorestframework==3.11.2
 idna==2.6
 Markdown==2.6.9
 oauthlib==2.0.4
